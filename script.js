@@ -3,34 +3,34 @@ const end='2025-10-31T23:59:59';const parts={dd:$('#days'),hh:$('#hours'),mm:$('
 function tick(){const e=new Date(end),n=new Date();let d=Math.max(0,e-n);const s=Math.floor(d/1000)%60,m=Math.floor(d/60000)%60,h=Math.floor(d/3600000)%24,dd=Math.floor(d/86400000);
 parts.dd.textContent=String(dd).padStart(2,'0');parts.hh.textContent=String(h).padStart(2,'0');parts.mm.textContent=String(m).padStart(2,'0');parts.ss.textContent=String(s).padStart(2,'0');}
 tick();setInterval(tick,1000);
-const bannerData=[{name:'Lama',level:'A',avatar:'assets/avatar_1.png'},{name:'Zein',level:'B',avatar:'assets/avatar_2.png'},{name:'Soso',level:'C',avatar:'assets/avatar_3.png'},{name:'Ayman',level:'D',avatar:'assets/avatar_4.png'},{name:'Mariam',level:'A',avatar:'assets/avatar_5.png'},{name:'Kareem',level:'B',avatar:'assets/avatar_6.png'}];
+const bannerData=[{name:'Lama',level:'A',avatar:'avatar_1.png'},{name:'Zein',level:'B',avatar:'avatar_2.png'},{name:'Soso',level:'C',avatar:'avatar_3.png'},{name:'Ayman',level:'D',avatar:'avatar_4.png'},{name:'Mariam',level:'A',avatar:'avatar_5.png'},{name:'Kareem',level:'B',avatar:'avatar_6.png'}];
 const track=$('#bannersTrack');const chip={A:'level-A-chip',B:'level-B-chip',C:'level-C-chip',D:'level-D-chip'};
 function spawnRow(r){const dir=r%2===0?'rtl':'ltr';const base=r*900;const y=r*38;bannerData.forEach((it,i)=>{const b=document.createElement('div');b.className='banner';b.style.top=y+'px';const speed=16+Math.random()*8;b.style.animation=(dir==='rtl'?'flyRtl':'flyLtr')+' '+speed+'s linear infinite';b.style.animationDelay=(base+i*800)+'ms';b.innerHTML=`<img class="avatar" src="${it.avatar}"/><span class="name">${it.name}</span><span class="level ${chip[it.level]}">المستوى ${it.level}</span>`;track.appendChild(b);});}
 for(let r=0;r<3;r++)spawnRow(r);
-const cfg={A:{bet:'رهان 250000',items:[{icon:'assets/diamond.png',title:'شحن 250000 ماسه',progress:'(250000/0)',reward:'7500'},{},{},{},{},{},{}]},
-B:{bet:'رهان 50000',items:[{icon:'assets/diamond.png',title:'شحن 50000 ماسه',progress:'(50000/0)',reward:'2000'},{},{},{},{},{},{}]},
-C:{bet:'رهان 20000',items:[{icon:'assets/diamond.png',title:'شحن 20000 ماسه',progress:'(20000/0)',reward:'750'},{},{},{},{},{},{}]},
-D:{bet:'رهان 2000',items:[{icon:'assets/diamond.png',title:'شحن 2000 ماسه',progress:'(2000/0)',reward:'200'},{},{},{},{},{},{}]},};
+const cfg={A:{bet:'رهان 250000',items:[{icon:'diamond.png',title:'شحن 250000 ماسه',progress:'(250000/0)',reward:'7500'},{},{},{},{},{},{}]},
+B:{bet:'رهان 50000',items:[{icon:'diamond.png',title:'شحن 50000 ماسه',progress:'(50000/0)',reward:'2000'},{},{},{},{},{},{}]},
+C:{bet:'رهان 20000',items:[{icon:'diamond.png',title:'شحن 20000 ماسه',progress:'(20000/0)',reward:'750'},{},{},{},{},{},{}]},
+D:{bet:'رهان 2000',items:[{icon:'diamond.png',title:'شحن 2000 ماسه',progress:'(2000/0)',reward:'200'},{},{},{},{},{},{}]},};
 const details=$('#levelDetails');const dlg=$('#rewardDialog'),body=$('#rewardBody'),title=$('#rewardTitle');document.querySelector('.close').addEventListener('click',()=>dlg.close());
 function render(l){const data=cfg[l];details.hidden=false;details.innerHTML=`<div class="header"><div class="pills"><span class="pill pill-level"><span class="dot"></span>المستوى ${l}</span></div><div class="pills"><span class="pill pill-bet"><span class="dot"></span>${data.bet}</span></div></div><div class="reqs-grid"></div>`;const grid=details.querySelector('.reqs-grid');
-Array.from({length:7}).forEach((_,i)=>{const item=data.items[i]||{};const icon=item.icon||`assets/icon_${i+1}.png`;const titleText=item.title||`بند ${i+1}`;const progress=item.progress?`<div class="subnote">${item.progress}</div>`:'';const hasThumbs=i>=3;const row=document.createElement('div');row.className='req';
-row.innerHTML=`<div class="icon-col"><img src="${icon}" alt=""><button class="btn reward-mini btn-red">المكافأة</button></div><div class="title-wrap"><div class="title">${titleText}</div>${progress}${hasThumbs?`<div class="thumbs"><div class="thumb"><img src="assets/thumb_placeholder.png"></div><div class="thumb"><img src="assets/thumb_placeholder.png"></div><div class="thumb"><img src="assets/thumb_placeholder.png"></div><div class="thumb"><img src="assets/thumb_placeholder.png"></div><div class="thumb"><img src="assets/thumb_placeholder.png"></div></div>`:''}</div><button class="btn btn-blue">غير مكتمل</button>`;
+Array.from({length:7}).forEach((_,i)=>{const item=data.items[i]||{};const icon=item.icon||`icon_${i+1}.png`;const titleText=item.title||`بند ${i+1}`;const progress=item.progress?`<div class="subnote">${item.progress}</div>`:'';const hasThumbs=i>=3;const row=document.createElement('div');row.className='req';
+row.innerHTML=`<div class="icon-col"><img src="${icon}" alt=""><button class="btn reward-mini btn-red">المكافأة</button></div><div class="title-wrap"><div class="title">${titleText}</div>${progress}${hasThumbs?`<div class="thumbs"><div class="thumb"><img src="thumb_placeholder.png"></div><div class="thumb"><img src="thumb_placeholder.png"></div><div class="thumb"><img src="thumb_placeholder.png"></div><div class="thumb"><img src="thumb_placeholder.png"></div><div class="thumb"><img src="thumb_placeholder.png"></div></div>`:''}</div><button class="btn btn-blue">غير مكتمل</button>`;
 const [rewardBtn,statusBtn]=row.querySelectorAll('.btn');let done=false;rewardBtn.textContent='المكافأة';
 statusBtn.addEventListener('click',()=>{done=!done;statusBtn.className='btn '+(done?'btn-red':'btn-blue');statusBtn.textContent=done?'مكتمل':'غير مكتمل';rewardBtn.className='btn reward-mini '+(done?'btn-green':'btn-red');rewardBtn.textContent=done?'احصل الآن':'المكافأة';});
-rewardBtn.addEventListener('click',()=>{title.textContent=`المكافأة`;const val=item.reward;body.innerHTML=val?`<div class="reward-card"><div class="reward-amount"><img src="assets/diamond.png" alt="diamond"><span>${val}</span></div><p class="reward-note">احصل على المكافأة عند اكتمال البند.</p></div>`:'<p>سيتم تحديد المكافأة لاحقًا.</p>';dlg.showModal();});
+rewardBtn.addEventListener('click',()=>{title.textContent=`المكافأة`;const val=item.reward;body.innerHTML=val?`<div class="reward-card"><div class="reward-amount"><img src="diamond.png" alt="diamond"><span>${val}</span></div><p class="reward-note">احصل على المكافأة عند اكتمال البند.</p></div>`:'<p>سيتم تحديد المكافأة لاحقًا.</p>';dlg.showModal();});
 grid.appendChild(row);});}
 $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)));
 
 // === STANDARDIZE: thumbs for all requirements across levels ===
 (function(){
   const T = {
-    0: Array(5).fill('assets/icon_1.png'),
-    1: Array(5).fill('assets/icon_2.png'),
-    2: Array(5).fill('assets/icon_3.png'),
-    3: Array(5).fill('assets/icon_4.png'),
-    4: Array(5).fill('assets/icon_5.png'),
-    5: Array(5).fill('assets/icon_6.png'),
-    6: ['assets/bonus_diamond.png','assets/bonus_diamond.png','assets/bonus_diamond.png','assets/question_mark.png','assets/question_mark.png']
+    0: Array(5).fill('icon_1.png'),
+    1: Array(5).fill('icon_2.png'),
+    2: Array(5).fill('icon_3.png'),
+    3: Array(5).fill('icon_4.png'),
+    4: Array(5).fill('icon_5.png'),
+    5: Array(5).fill('icon_6.png'),
+    6: ['bonus_diamond.png','bonus_diamond.png','bonus_diamond.png','question_mark.png','question_mark.png']
   };
   ['A','B','C','D'].forEach(k=>{
     const arr = (cfg[k] && cfg[k].items) || [];
@@ -44,7 +44,7 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
 
 // === OVERRIDE: Items 2 & 3 per level with Slot icon and texts ===
 (function(){
-  const slot='assets/slot_machine.png';
+  const slot='slot_machine.png';
   const sets = {
     A: [['راهن بـ 2000 من الماس 200 مره','( 200/0)'], ['راهن بـ 2000 من الماس 400 مره','( 400/0)']],
     B: [['راهن بـ 500 من الماس 200 مره','( 200/0)'], ['راهن بـ 500 من الماس 300 مره','( 300/0)']],
@@ -66,9 +66,9 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
 
 // === OVERRIDE: Level D items 4-6 (bananas, lemons, cherries) ===
 (function(){
-  const banana='assets/banana.png';
-  const lemon='assets/lemon.png';
-  const cherry='assets/cherry.png';
+  const banana='banana.png';
+  const lemon='lemon.png';
+  const cherry='cherry.png';
   const arr = (cfg['D'] && cfg['D'].items) || [];
   // بند 4 => i=3
   arr[3] = Object.assign({}, arr[3]||{}, {
@@ -99,7 +99,7 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
   const arrs=['A','B','C','D'].map(l => (cfg[l] && cfg[l].items) || []);
   arrs.forEach(arr => {
     if(!arr[6]) arr[6]={};
-    arr[6].thumbs=['assets/bonus_diamond.png','assets/bonus_diamond.png','assets/bonus_diamond.png','assets/question_mark.png','assets/question_mark.png'];
+    arr[6].thumbs=['bonus_diamond.png','bonus_diamond.png','bonus_diamond.png','question_mark.png','question_mark.png'];
   });
 })();
 
@@ -112,15 +112,15 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
     if(!arr[idx]) arr[idx] = {};
     if(!arr[idx].icon){
       const fallbackByIdx = {
-        0: 'assets/icon_1.png',
-        1: 'assets/icon_2.png',
-        2: 'assets/icon_3.png',
-        3: 'assets/icon_4.png',
-        4: 'assets/icon_5.png',
-        5: 'assets/icon_6.png',
-        6: 'assets/icon_7.png',
+        0: 'icon_1.png',
+        1: 'icon_2.png',
+        2: 'icon_3.png',
+        3: 'icon_4.png',
+        4: 'icon_5.png',
+        5: 'icon_6.png',
+        6: 'icon_7.png',
       };
-      arr[idx].icon = fallbackByIdx[idx] || 'assets/thumb_placeholder.png';
+      arr[idx].icon = fallbackByIdx[idx] || 'thumb_placeholder.png';
     }
     return arr[idx];
   }
@@ -131,30 +131,30 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
 
   // Items 2 & 3 across all levels -> slot machine thumbs
   ['A','B','C','D'].forEach(l => {
-    setThumbs(l, 1, 'assets/slot_machine.png'); // بند 2
-    setThumbs(l, 2, 'assets/slot_machine.png'); // بند 3
+    setThumbs(l, 1, 'slot_machine.png'); // بند 2
+    setThumbs(l, 2, 'slot_machine.png'); // بند 3
   });
 
   // Level D items 4-6 -> bananas, lemons, cherries
-  setThumbs('D', 3, 'assets/banana.png'); // بند 4
-  setThumbs('D', 4, 'assets/lemon.png');  // بند 5
-  setThumbs('D', 5, 'assets/cherry.png'); // بند 6
+  setThumbs('D', 3, 'banana.png'); // بند 4
+  setThumbs('D', 4, 'lemon.png');  // بند 5
+  setThumbs('D', 5, 'cherry.png'); // بند 6
 
   // Keep requirement 7 thumbs (3 diamonds + 2 question marks), do not touch icon
   const arrD = (cfg['D'] && cfg['D'].items) || [];
   if(!arrD[6]) arrD[6]={};
-  arrD[6].thumbs=['assets/bonus_diamond.png','assets/bonus_diamond.png','assets/bonus_diamond.png','assets/question_mark.png','assets/question_mark.png'];
+  arrD[6].thumbs=['bonus_diamond.png','bonus_diamond.png','bonus_diamond.png','question_mark.png','question_mark.png'];
 })();
 
 
 // === HARD OVERRIDE: Force Level D — Item 4 thumbnails in DOM after render ===
 (function(){
   const imgs = [
-    'assets/thumbs/P1.png',
-    'assets/thumbs/P2.png',
-    'assets/thumbs/P3.png',
-    'assets/thumbs/P4.png',
-    'assets/thumbs/P5.png',
+    'thumbs/P1.png',
+    'thumbs/P2.png',
+    'thumbs/P3.png',
+    'thumbs/P4.png',
+    'thumbs/P5.png',
   ];
   if (typeof render === 'function') {
     const __render = render;
@@ -191,7 +191,7 @@ $$('.level').forEach(b=>b.addEventListener('click',()=>render(b.dataset.level)))
 
 // === HARD OVERRIDE: Force Level D — Item 5 (lemon) thumbnails in DOM after render ===
 (function(){
-  const imgs = ['assets/thumbs/L1.png', 'assets/thumbs/L2.png', 'assets/thumbs/L3.png', 'assets/thumbs/L4.png', 'assets/thumbs/L5.png'];
+  const imgs = ['thumbs/L1.png', 'thumbs/L2.png', 'thumbs/L3.png', 'thumbs/L4.png', 'thumbs/L5.png'];
   if (typeof render === 'function' && imgs.length){
     const __render2 = render;
     render = function(l){

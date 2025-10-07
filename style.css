@@ -34,36 +34,3 @@
 .reward-card{display:flex;flex-direction:column;align-items:center;gap:10px;background:#0b1030;border-radius:16px;padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
 .reward-amount{display:flex;align-items:center;gap:10px;font-weight:900;font-size:32px}.reward-amount img{width:44px;height:44px;object-fit:contain}.reward-note{opacity:.9;margin:0}
 @media(max-width:992px){.prize-row{grid-template-columns:1fr}.levels-row{flex-wrap:wrap}}.footer{text-align:center;padding:20px 12px}
-
-
-/* === UI UPGRADE: Level circles (A–D) — luxe neon/glass style === */
-
-.level{
-  position:relative;
-  width:168px;
-  aspect-ratio:1/1;
-  border-radius:50%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;color:#fff;
-  box-shadow:0 16px 40px rgba(0,0,0,.45), inset 0 2px 12px rgba(255,255,255,.14), inset 0 -8px 18px rgba(0,0,0,.35);
-  transform:scale(.64);
-  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
-  overflow:hidden; isolation:isolate;
-  border:2px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(2px) saturate(1.05);
-}
-.level:hover{ transform:scale(.7); box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 3px 16px rgba(255,255,255,.16), inset 0 -10px 24px rgba(0,0,0,.4); filter:brightness(1.05) }
-.level::after{ content:""; position:absolute; inset:0; background:radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.18) 0 25%, transparent 30%); mix-blend-mode:screen; pointer-events:none }
-.level::before{ content:""; position:absolute; inset:-6px; border-radius:50%; padding:6px;
-  background:conic-gradient(from 220deg,var(--ring-1),var(--ring-2));
-  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 calc(100% - 9px));
-          mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 calc(100% - 9px));
-  opacity:.9; filter:blur(.25px); z-index:-1 }
-.level .eng{font-size:32px;font-weight:900;letter-spacing:.3px;text-shadow:0 2px 10px rgba(0,0,0,.35)}
-.level .bet{font-size:12px;font-weight:800;color:#f5fbffff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
-.level-A{ --ring-1:#ff66c6; --ring-2:#7a2bff; background: radial-gradient(80% 80% at 35% 25%, #ffffff22 0 30%, transparent 35%), linear-gradient(135deg,#ff3ea5 10%,#7a2bff 90%) }
-.level-B{ --ring-1:#27e5ff; --ring-2:#0b58c9; background: radial-gradient(80% 80% at 35% 25%, #ffffff22 0 30%, transparent 35%), linear-gradient(135deg,#00c6ff 10%,#0b58c9 90%) }
-.level-C{ --ring-1:#5bffa1; --ring-2:#0e8a3e; background: radial-gradient(80% 80% at 35% 25%, #ffffff22 0 30%, transparent 35%), linear-gradient(135deg,#22c55e 10%,#0e8a3e 90%) }
-.level-D{ --ring-1:#ffd166; --ring-2:#ff7a1a; background: radial-gradient(80% 80% at 35% 25%, #ffffff22 0 30%, transparent 35%), linear-gradient(135deg,#ffb703 10%,#c65a12 90%) }
-.level:hover .eng{ text-shadow:0 0 8px rgba(255,255,255,.35), 0 2px 10px rgba(0,0,0,.45) }
-@media(max-width:520px){ .level{ transform:scale(.74) } .level:hover{ transform:scale(.78) } .level .eng{ font-size:28px } }
